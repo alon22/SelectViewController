@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let vc = SelectViewController<ListItem>()
+    let vcCustom = SelectViewControllerCustom<ListItem, CustomCell>()
     var selected = [ListItem]()
 
     enum Cells: Int, CaseIterable {
@@ -27,7 +28,18 @@ class ViewController: UIViewController {
         setupSelectViewController()
     }
 
+    func setupTableView() {
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ID")
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
+
     func setupSelectViewController() {
+        configureSelect()
+        configureSelectCustom()
+    }
+
+    private func configureSelect() {
         vc.delegate = self
         vc.items = [
             ListItem(id: 1, name: "Test 1"),
@@ -45,10 +57,23 @@ class ViewController: UIViewController {
         }
     }
 
-    func setupTableView() {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ID")
-        tableView.dataSource = self
-        tableView.delegate = self
+    private func configureSelectCustom() {
+        vcCustom.delegate = self
+        vcCustom.items = [
+            ListItem(id: 1, name: "Test 1", note: "Note 1"),
+            ListItem(id: 2, name: "Test 2", note: "Note 2"),
+            ListItem(id: 3, name: "Test 3", note: "Note 3"),
+            ListItem(id: 4, name: "Test 4", note: "Note 4"),
+            ListItem(id: 5, name: "Test 5", note: "Note 5")
+        ]
+        vcCustom.block = { cell, item in
+            guard let item = item else {
+                return
+            }
+            cell.labelTitle.text = item.name
+            cell.labelNote.text = item.note
+            cell.isSelected = self.selected.contains(item)
+        }
     }
 
     func choseOneOption() {
@@ -66,10 +91,10 @@ class ViewController: UIViewController {
     }
 
     func pushNavigation() {
-        vc.options.multipleSelection = true
-        vc.options.title = "Push navigation, custom type"
-        vc.type = .custom(0)
-        navigationController?.pushViewController(vc, animated: true)
+        vcCustom.options.multipleSelection = true
+        vcCustom.options.title = "Push navigation, custom cell and type"
+        vcCustom.type = .custom(0)
+        navigationController?.pushViewController(vcCustom, animated: true)
     }
 }
 
@@ -122,6 +147,7 @@ extension ViewController: SelectViewControllerDelegate {
 struct ListItem: Equatable {
     var id: Int?
     var name: String?
+    var note: String?
 
     static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.id == rhs.id

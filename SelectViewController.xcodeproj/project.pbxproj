@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		801C37EB25E123C80026D741 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801C37EA25E123C80026D741 /* UIViewController.swift */; };
+		801C37EB25E123C80026D741 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801C37EA25E123C80026D741 /* Extension.swift */; };
 		80887EE725D7D7CC00C28005 /* SelectViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80887EE625D7D7CC00C28005 /* SelectViewControllerDelegate.swift */; };
 		80C913D825D2FF870018884F /* SelectViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 80C913D625D2FF870018884F /* SelectViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		80C9140425D2FFDD0018884F /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C9140125D2FFDD0018884F /* SelectViewController.swift */; };
@@ -16,7 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		801C37EA25E123C80026D741 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		801C37EA25E123C80026D741 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		80887EE625D7D7CC00C28005 /* SelectViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewControllerDelegate.swift; sourceTree = "<group>"; };
 		80C913D325D2FF870018884F /* SelectViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SelectViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80C913D625D2FF870018884F /* SelectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectViewController.h; sourceTree = "<group>"; };
@@ -37,14 +37,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		801C37ED25E124020026D741 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				801C37EA25E123C80026D741 /* UIViewController.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		80C913C925D2FF870018884F = {
 			isa = PBXGroup;
 			children = (
@@ -66,7 +58,7 @@
 		80C9140025D2FFDD0018884F /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				801C37ED25E124020026D741 /* Extensions */,
+				801C37EA25E123C80026D741 /* Extension.swift */,
 				80C9140125D2FFDD0018884F /* SelectViewController.swift */,
 				80887EE625D7D7CC00C28005 /* SelectViewControllerDelegate.swift */,
 				80C9140225D2FFDD0018884F /* SelectOptions.swift */,
@@ -157,7 +149,7 @@
 				80C9140425D2FFDD0018884F /* SelectViewController.swift in Sources */,
 				80C9140625D2FFDD0018884F /* SelectCell.swift in Sources */,
 				80887EE725D7D7CC00C28005 /* SelectViewControllerDelegate.swift in Sources */,
-				801C37EB25E123C80026D741 /* UIViewController.swift in Sources */,
+				801C37EB25E123C80026D741 /* Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

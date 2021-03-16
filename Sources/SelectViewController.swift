@@ -7,13 +7,20 @@
 
 import UIKit
 
-public class SelectViewController<T>: UIViewController, UITableViewDataSource, UITableViewDelegate {
+public class SelectViewController<T>: SelectViewControllerCustom<T, SelectViewCell> {
+
+}
+
+
+public class SelectViewControllerCustom<T, U:UITableViewCell>: UIViewController,
+                                                               UITableViewDataSource,
+                                                               UITableViewDelegate where U: SelectCell {
 
     private let tableView = UITableView()
     private let stackView = UIStackView()
     private let navigationBar = UINavigationBar()
     public var items: [T]?
-    public var block: ((_ cell: SelectCell, _ item: T?) -> Void)?
+    public var block: ((_ cell: U, _ item: T?) -> Void)?
     public var options = SelectOptions()
     public var type: SelectType = .default
     public var delegate: SelectViewControllerDelegate?
@@ -34,7 +41,11 @@ public class SelectViewController<T>: UIViewController, UITableViewDataSource, U
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(tableView)
 
-        tableView.register(SelectCell.self, forCellReuseIdentifier: SelectCell.reuseID)
+        if U() is SelectViewCell {
+            tableView.register(U.self, forCellReuseIdentifier: U.reuseId())
+        } else {
+            tableView.register(U.nib(), forCellReuseIdentifier: U.reuseId())
+        }
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
@@ -70,7 +81,7 @@ public class SelectViewController<T>: UIViewController, UITableViewDataSource, U
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SelectCell.reuseID, for: indexPath) as! SelectCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: U.reuseId(), for: indexPath) as! U
         block?(cell, items?[indexPath.row])
         if cell.isSelected {
             tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
